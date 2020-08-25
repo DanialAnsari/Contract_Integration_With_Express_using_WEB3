@@ -1,7 +1,7 @@
 var exports = module.exports = {};
 
 
-exports.contract_address = 'Your Contract Address';
+exports.contract_address = '0x2129F7D1C3a3b29D5dd6813d159067bEC81529A2';
 exports.abi= [
   {
     "inputs": [],
@@ -220,5 +220,6 @@ exports.abi= [
     "type": "function"
   }
 ]
-exports.from='Address to execture functions from';
-exports.private_key='from account private key';
+exports.from='0x51a73C48c8A9Ef78323ae8dc0bc1908A1C49b6c6';
+exports.private_key='609a8a9ef6fa45955886ea323a70ab0ded6b5a656214fea4680605557c1d88b8';
+
