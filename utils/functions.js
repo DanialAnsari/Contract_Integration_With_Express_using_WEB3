@@ -16,8 +16,7 @@ const contract = new web3.eth.Contract(constants.abi,constants.contract_address)
 
 exports.transfer = async (to,amount) => {
 
-    web3.eth.getTransactionCount(constants.from, "pending").then(async res => {
-        let count = res
+        let count = web3.eth.getTransactionCount(constants.from, "pending")
 
         let gasPrices =  await exports.getCurrentGasPrices();
         let tokens = new BigNumber(amount * (10**18));
@@ -30,8 +29,7 @@ exports.transfer = async (to,amount) => {
             nonce: web3.utils.toHex(count),
             gasLimit: web3.utils.toHex(300000)
         }
-
-        web3.eth.accounts.signTransaction(rawTransaction, constants.private_key ).then(async signed => {
+            let signed=web3.eth.accounts.signTransaction(rawTransaction, constants.private_key)
             web3.eth.sendSignedTransaction(signed.rawTransaction)
                 .on('confirmation', (confirmationNumber, receipt) => {
                     if (confirmationNumber === 1) {
@@ -44,20 +42,14 @@ exports.transfer = async (to,amount) => {
                 .on('transactionHash', async (hash) => {
                     console.log(hash);
                 });
-        }).catch(e => {
-            console.log(e)
-        });
 
-    }).catch(error => {
-        console.log(error)
-    })
 };
 
 
 exports.approve = async (to,amount) => {
 
-    web3.eth.getTransactionCount(constants.from, "pending").then(async res => {
-        let count = res
+
+        let count = web3.eth.getTransactionCount(constants.from, "pending")
 
         let gasPrices = await exports.getCurrentGasPrices();
         let tokens = new BigNumber(amount * (10**18));
@@ -70,7 +62,7 @@ exports.approve = async (to,amount) => {
             gasLimit: web3.utils.toHex(300000)
         }
 
-        web3.eth.accounts.signTransaction(rawTransaction, constants.private_key ).then(async signed => {
+        signed=web3.eth.accounts.signTransaction(rawTransaction, constants.private_key)
             web3.eth.sendSignedTransaction(signed.rawTransaction)
                 .on('confirmation', (confirmationNumber, receipt) => {
                     if (confirmationNumber === 1) {
@@ -83,19 +75,13 @@ exports.approve = async (to,amount) => {
                 .on('transactionHash', async (hash) => {
                     console.log(hash);
                 });
-        }).catch(e => {
-            console.log(e)
-        });
 
-    }).catch(error => {
-        console.log(error)
-    })
+
+
 };
 
 exports.transferFrom = async (sender,to,amount) => {
-
-    web3.eth.getTransactionCount(constants.from, "pending").then(async res => {
-        let count = res
+        let count = web3.eth.getTransactionCount(constants.from, "pending")
 
         let gasPrices = await exports.getCurrentGasPrices();
         let tokens = new BigNumber(amount * (10**18));
@@ -107,8 +93,8 @@ exports.transferFrom = async (sender,to,amount) => {
             nonce: web3.utils.toHex(count),
             gasLimit: web3.utils.toHex(300000)
         }
-
-        web3.eth.accounts.signTransaction(rawTransaction, constants.private_key ).then(async signed => {
+        
+            signed=web3.eth.accounts.signTransaction(rawTransaction, constants.private_key)
             web3.eth.sendSignedTransaction(signed.rawTransaction)
                 .on('confirmation', (confirmationNumber, receipt) => {
                     if (confirmationNumber === 1) {
@@ -121,13 +107,9 @@ exports.transferFrom = async (sender,to,amount) => {
                 .on('transactionHash', async (hash) => {
                     console.log(hash);
                 });
-        }).catch(e => {
-            console.log(e)
-        });
+     
 
-    }).catch(error => {
-        console.log(error)
-    })
+  
 };
 
 exports.balanceOf = async (account)=>{
